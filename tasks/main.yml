@@ -1,0 +1,11 @@
+---
+- name: "{{ ct_kafka_task_prefix }} Load persistent volumes"
+  include_vars: "persist_data.yml"
+  when: ct_kafka_persist_data
+- name: "{{ ct_kafka_task_prefix }} Create Kafka node"
+  include_tasks: node.yml
+  loop: "{{ ct_kafka_nodes }}"
+  loop_control:
+    loop_var: ct_kafka_node
+  when: ct_kafka_node.host == inventory_hostname
+...

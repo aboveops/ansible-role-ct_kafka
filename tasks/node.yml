@@ -1,0 +1,39 @@
+---
+- name: "{{ ct_kafka_task_prefix }} Create config directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    recurse: true
+  loop:
+    - "{{ ct_kafka_path_config_base }}"
+- name: "{{ ct_kafka_task_prefix }} Create data directory"
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+    owner: '1000'
+    group: '1000'
+    recurse: true
+  loop:
+    - "{{ ct_kafka_path_data }}"
+  when: ct_kafka_persist_data
+- name: "{{ ct_kafka_task_prefix }} Create env file"
+  template:
+    src: "{{ ct_kafka_template_env }}"
+    dest: "{{ ct_kafka_path_config_file }}"
+    mode: '0644'
+- name: "{{ ct_kafka_task_prefix }} Create container"
+  docker_container:
+    name: "{{ ct_kafka_ct_name }}"
+    image: "{{ ct_kafka_ct_image }}:{{ ct_kafka_ct_version }}"
+    ports:
+      - "{{ ct_kafka_bind_addr }}:{{ ct_kafka_bind_port }}:{{ ct_kafka_ct_bind_port }}"
+    env_file: "{{ ct_kafka_path_config_file }}"
+    restart_policy: "{{ ct_kafka_ct_restart_policy }}"
+    state: "{{ ct_kafka_ct_state }}"
+    restart: "{{ ct_kafka_ct_restart }}"
+    pull: "{{ ct_kafka_ct_pull }}"
+    recreate: "{{ ct_kafka_ct_recreate }}"
+    volumes: "{{ ct_kafka_ct_volumes }}"
+...

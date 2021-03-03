@@ -1,0 +1,4 @@
+---
+ct_kafka_ct_volumes:
+  - "{{ ct_kafka_path_data }}:{{ ct_kafka_path_ct_data }}"
+...
