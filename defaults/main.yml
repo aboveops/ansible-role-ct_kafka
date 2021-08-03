@@ -39,4 +39,5 @@ ct_kafka_env_kafka_advertised_host_name: "{{ ct_kafka_bind_addr }}"
 #   - host: k02
 #     bind_ip: "10.100.20.201"
 #     id: 2
+ct_kafka_env_extra: {}
 ...
