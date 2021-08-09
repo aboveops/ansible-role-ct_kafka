@@ -1,0 +1,4 @@
+---
+ct_kafka_ct_ports:
+  - "{{ ct_kafka_bind_addr }}:{{ ct_kafka_bind_port }}:{{ ct_kafka_ct_bind_port }}"
+...

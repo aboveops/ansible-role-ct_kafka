@@ -27,8 +27,8 @@
   docker_container:
     name: "{{ ct_kafka_ct_name }}"
     image: "{{ ct_kafka_ct_image }}:{{ ct_kafka_ct_version }}"
-    ports:
-      - "{{ ct_kafka_bind_addr }}:{{ ct_kafka_bind_port }}:{{ ct_kafka_ct_bind_port }}"
+    ports: "{{ ct_kafka_ct_ports }}"
+    #  - "{{ ct_kafka_bind_addr }}:{{ ct_kafka_bind_port }}:{{ ct_kafka_ct_bind_port }}"
     env_file: "{{ ct_kafka_path_config_file }}"
     restart_policy: "{{ ct_kafka_ct_restart_policy }}"
     state: "{{ ct_kafka_ct_state }}"
@@ -36,4 +36,5 @@
     pull: "{{ ct_kafka_ct_pull }}"
     recreate: "{{ ct_kafka_ct_recreate }}"
     volumes: "{{ ct_kafka_ct_volumes }}"
+    network_mode: "{{ ct_kafka_ct_network_mode }}"
 ...

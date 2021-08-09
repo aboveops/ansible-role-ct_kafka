@@ -1,5 +1,8 @@
 ---
 ct_kafka_task_prefix: "=== KAFKA CT ==="
+# Common settings
+ct_kafka_enable_ports: false
+ct_kafka_persist_data: true
 # File names
 ct_kafka_template_env: "env.j2"
 ct_kafka_file_env: "{{ ct_kafka_ct_name }}.env"
@@ -22,8 +25,9 @@ ct_kafka_ct_state: "started"
 ct_kafka_ct_restart: "no"
 ct_kafka_ct_pull: "no"
 ct_kafka_ct_recreate: "no"
+ct_kafka_ct_ports: []
 ct_kafka_ct_volumes: []
-ct_kafka_persist_data: false
+ct_kafka_ct_network_mode: "host"
 # Environment variables
 ct_kafka_env_kafka_broker_id: "{{ ct_kafka_node.id }}"
 # You will need to specify your zookeeper servers

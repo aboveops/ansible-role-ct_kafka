@@ -1,4 +1,7 @@
 ---
+- name: "{{ ct_kafka_task_prefix }} Enable ports?"
+  include_vars: kafka_ports.yml
+  when: ct_kafka_enable_ports
 - name: "{{ ct_kafka_task_prefix }} Load persistent volumes"
   include_vars: "persist_data.yml"
   when: ct_kafka_persist_data
